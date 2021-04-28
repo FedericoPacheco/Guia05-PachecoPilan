@@ -7,6 +7,7 @@ public class Alquiler implements Contratable
 	private LocalDate diaDeInicio;
 	private LocalDate diaDeFinalizacion;
 	private LocalDate diaDeDevolucion;
+	private Herramienta herramienta;
 	
 	public Boolean enMora()
 	{
