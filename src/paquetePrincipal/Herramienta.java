@@ -19,6 +19,7 @@ public class Herramienta implements Identificable
 		this.app = app;
 	}
 
+	public Double getCostoPorDia() {return costoPorDia;}
 	@Override
 	public Integer getId() { return id; }
 	

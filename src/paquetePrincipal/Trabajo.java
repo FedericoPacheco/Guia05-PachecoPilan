@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public abstract class Trabajo implements Contratable, Identificable
 {
 	static protected Integer contadorIds = 0;
+	static protected Double porcentajeExtraPorUrgencia = 0.5;
 	
 	protected Integer id;
 	protected LocalDate diaDeFinalizacion;
@@ -23,7 +24,12 @@ public abstract class Trabajo implements Contratable, Identificable
 	}
 
 	@Override
-	public Integer getId() {
-		return id;
+	public Integer getId() { return id; }
+	public Double multiplicadorPorUrgencia() 
+	{
+		Double auxDouble = 1.0;
+		if (esUrgente) 
+			auxDouble += porcentajeExtraPorUrgencia;
+		return auxDouble;
 	}
 }

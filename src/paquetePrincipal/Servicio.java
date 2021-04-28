@@ -17,10 +17,9 @@ public abstract class Servicio implements Identificable
 		this.app = app;
 	}
 	
-	@Override
-	public Integer getId(){
-		return id;
-	}
-	
+	public abstract Double getMonto();
 	public abstract Trabajo contratarTrabajo(Boolean esUrgente);
+
+	@Override
+	public Integer getId() { return id; }
 }

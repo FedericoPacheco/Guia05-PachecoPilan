@@ -23,4 +23,6 @@ public class ServicioEstandar extends Servicio
 		return auxTrabajo;
 	}
 	
+	@Override
+	public Double getMonto() { return monto; }
 }

@@ -30,7 +30,10 @@ public class Trabajador implements Identificable
 
 	public void agregarTrabajo(Trabajo trabajo)	{ trabajosARealizar.add(trabajo); }
 
+	public Oficio getOficio() {return oficio; }
+	public Double getCosto(Integer horasTrabajadas) {return costoPorHora * horasTrabajadas; }
+	public Double getComision() {return porcentajeDeComision; }
+	
 	@Override
 	public Integer getId() { return id; }
-	public Oficio getOficio() {return oficio; }
 }

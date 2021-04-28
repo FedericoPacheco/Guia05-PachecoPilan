@@ -19,4 +19,7 @@ public class ServicioPersonalizado extends Servicio
 		
 		return auxTrabajo;
 	}
+
+	@Override
+	public Double getMonto() { return 0.0; }
 }
