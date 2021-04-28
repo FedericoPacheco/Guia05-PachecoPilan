@@ -11,13 +11,15 @@ public class Usuario implements Identificable
 	private String correoElectronico;
 	private String contrasenia;
 	private List<Contratable> trabajosYAlquileresContratados;
+	private ReparaFix app;
 	
-	public Usuario(String nombreUsuario, String correoElectronico, String contrasenia) 
+	public Usuario(String nombreUsuario, String correoElectronico, String contrasenia, ReparaFix app) 
 	{
 		this.id = contadorIds++;
 		this.nombreUsuario = nombreUsuario;
 		this.correoElectronico = correoElectronico;
 		this.contrasenia = contrasenia;
+		this.app = app;
 	}
 
 	@Override

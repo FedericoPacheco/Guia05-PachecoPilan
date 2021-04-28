@@ -4,12 +4,9 @@ import java.time.LocalDate;
 
 public class TrabajoEstandar extends Trabajo
 {
-	static private Integer contadorIds = 0;
-	
-	public TrabajoEstandar(LocalDate diaDeFinalizacion, Boolean esUrgente, Servicio servicio)
+	public TrabajoEstandar(LocalDate diaDeFinalizacion, Boolean esUrgente, Servicio servicio, ReparaFix app)
 	{
-		super(diaDeFinalizacion, esUrgente, servicio);
-		this.id = contadorIds++;
+		super(diaDeFinalizacion, esUrgente, servicio, app);
 	}
 	
 	@Override

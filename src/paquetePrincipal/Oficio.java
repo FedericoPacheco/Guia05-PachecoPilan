@@ -6,12 +6,14 @@ public class Oficio implements Identificable
 	
 	private Integer id;
 	private String nombre;
+	private ReparaFix app;
 	
-	public Oficio(Integer id, String nombre) 
+	public Oficio(Integer id, String nombre, ReparaFix app) 
 	{
 		this.id = contadorIds++;
 		this.id = id;
 		this.nombre = nombre;
+		this.app = app;
 	}
 
 	@Override

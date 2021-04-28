@@ -14,8 +14,9 @@ public class Trabajador implements Identificable
 	private Double porcentajeDeComision;
 	private Oficio oficio;
 	private List<Trabajo> trabajosARealizar;
+	private ReparaFix app;
 	
-	public Trabajador(String nombre, String correoElectronico, Double costoPorHora, Double porcentajeDeComision, Oficio oficio) 
+	public Trabajador(String nombre, String correoElectronico, Double costoPorHora, Double porcentajeDeComision, Oficio oficio, ReparaFix app) 
 	{
 		this.id = contadorIds++;
 		this.nombre = nombre;
@@ -24,6 +25,7 @@ public class Trabajador implements Identificable
 		this.porcentajeDeComision = porcentajeDeComision;
 		this.oficio = oficio;
 		trabajosARealizar = new LinkedList<Trabajo>();
+		this.app = app;
 	}
 
 	public void agregarTrabajo(Trabajo trabajo)	{ trabajosARealizar.add(trabajo); }

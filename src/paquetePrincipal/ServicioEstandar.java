@@ -2,13 +2,11 @@ package paquetePrincipal;
 
 public class ServicioEstandar extends Servicio
 {
-	private static Integer contadorIds = 0;
 	private Double monto;
 	
-	public ServicioEstandar(String nombre, Oficio oficio, Double monto)
+	public ServicioEstandar(String nombre, Oficio oficio, ReparaFix app, Double monto)
 	{
-		super(nombre, oficio);
+		super(nombre, oficio, app);
 		this.monto = monto;
-		this.id = contadorIds++;
 	}
 }
