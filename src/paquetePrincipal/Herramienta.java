@@ -1,5 +1,7 @@
 package paquetePrincipal;
 
+import java.time.LocalDate;
+
 public class Herramienta implements Identificable
 {
 	private static Integer contadorIds = 0;
@@ -18,8 +20,17 @@ public class Herramienta implements Identificable
 	}
 
 	@Override
-	public Integer getId() {
-		return id;
+	public Integer getId() { return id; }
+	
+	public Alquiler contratarAlquiler(Integer cantidadDeDias, LocalDate diaDeInicio)
+	{
+		Alquiler auxAlquiler;
+		LocalDate diaDeFinalizacion = diaDeInicio.plusDays(cantidadDeDias);
+		
+		auxAlquiler = new Alquiler(diaDeInicio, diaDeFinalizacion, this, app);
+		app.agregarContratable(auxAlquiler);
+		
+		return auxAlquiler;
 	}
 	
 	

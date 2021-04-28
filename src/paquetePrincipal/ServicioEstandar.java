@@ -9,4 +9,18 @@ public class ServicioEstandar extends Servicio
 		super(nombre, oficio, app);
 		this.monto = monto;
 	}
+
+	@Override
+	public Trabajo contratarTrabajo(Boolean esUrgente) 
+	{
+		TrabajoEstandar auxTrabajo;
+		Trabajador auxTrabajador;
+		
+		auxTrabajador = app.buscarTrabajadorConOficio(oficio);
+		auxTrabajo = new TrabajoEstandar(esUrgente, this, auxTrabajador, app);
+		app.agregarContratable(auxTrabajo);
+		
+		return auxTrabajo;
+	}
+	
 }

@@ -10,14 +10,15 @@ public abstract class Trabajo implements Contratable, Identificable
 	protected LocalDate diaDeFinalizacion;
 	protected Boolean esUrgente;
 	protected Servicio servicio;
+	protected Trabajador trabajador;
 	protected ReparaFix app;
 	
-	public Trabajo(LocalDate diaDeFinalizacion, Boolean esUrgente, Servicio servicio, ReparaFix app) 
+	public Trabajo(Boolean esUrgente, Servicio servicio, Trabajador trabajador, ReparaFix app) 
 	{	
 		this.id = contadorIds++;
-		this.diaDeFinalizacion = diaDeFinalizacion;
 		this.esUrgente = esUrgente;
 		this.servicio = servicio;
+		this.trabajador = trabajador;
 		this.app = app;
 	}
 

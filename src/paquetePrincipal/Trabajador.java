@@ -32,4 +32,5 @@ public class Trabajador implements Identificable
 
 	@Override
 	public Integer getId() { return id; }
+	public Oficio getOficio() {return oficio; }
 }

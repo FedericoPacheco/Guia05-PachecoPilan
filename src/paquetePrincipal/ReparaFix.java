@@ -5,37 +5,58 @@ import java.util.List;
 
 public class ReparaFix // App
 {
-	private List<Contratable> serviciosYAlquileresRealizados;
-	private List<Trabajador> trabajadoresRegistrados;
-	private List<Usuario> usuariosRegistrados;
-	private List<Oficio> oficiosRegistrados;
-	private List<Servicio> serviciosDisponibles;
-	private List<Herramienta> herramientasDisponibles;
+	private List<Identificable> contratablesRealizados;
+	private List<Identificable> trabajadoresRegistrados;
+	private List<Identificable> usuariosRegistrados;
+	private List<Identificable> oficiosRegistrados;
+	private List<Identificable> serviciosDisponibles;
+	private List<Identificable> herramientasDisponibles;
 	
 	public ReparaFix() 
 	{
-		serviciosYAlquileresRealizados = new LinkedList<Contratable>();
-		trabajadoresRegistrados = new LinkedList<Trabajador>();
-		usuariosRegistrados = new LinkedList<Usuario>();
-		oficiosRegistrados = new LinkedList<Oficio>();
-		serviciosDisponibles = new LinkedList<Servicio>();
-		herramientasDisponibles = new LinkedList<Herramienta>();
+		contratablesRealizados  = new LinkedList<Identificable>();
+		trabajadoresRegistrados = new LinkedList<Identificable>();
+		usuariosRegistrados 	= new LinkedList<Identificable>();
+		oficiosRegistrados 		= new LinkedList<Identificable>();
+		serviciosDisponibles 	= new LinkedList<Identificable>();
+		herramientasDisponibles = new LinkedList<Identificable>();
 	}
 	
-	public void agregarContratable(Contratable contratable)  { serviciosYAlquileresRealizados.add(contratable); }
-	public void agregarTrabajador(Trabajador trabajador)	 { trabajadoresRegistrados.add(trabajador); 		}
-	public void agregarUsuario(Usuario usuario) 			 { usuariosRegistrados.add(usuario);				}
-	public void agregarOficio(Oficio oficio) 				 { oficiosRegistrados.add(oficio); 					}
-	public void agregarServicio(Servicio servicio) 			 { serviciosDisponibles.add(servicio); 				}
-	public void agregarHerramienta(Herramienta herramienta)  { herramientasDisponibles.add(herramienta); 		}
+	public void agregarContratable(Contratable contratable)  { contratablesRealizados.add((Identificable) contratable); }
+	public void agregarTrabajador(Trabajador trabajador)	 { trabajadoresRegistrados.add(trabajador); 			    }
+	public void agregarUsuario(Usuario usuario) 			 { usuariosRegistrados.add(usuario);			   		    }
+	public void agregarOficio(Oficio oficio) 				 { oficiosRegistrados.add(oficio); 						    }
+	public void agregarServicio(Servicio servicio) 			 { serviciosDisponibles.add(servicio); 					    }
+	public void agregarHerramienta(Herramienta herramienta)  { herramientasDisponibles.add(herramienta); 			    }
 	
-	 public Object buscar(List<Identificable> lista, Integer id)
+	public Contratable buscarContratable(Integer id) { return (Contratable) this.buscar(contratablesRealizados, id);  }
+	public Trabajador buscarTrabajador(Integer id)   { return (Trabajador) this.buscar(trabajadoresRegistrados, id);  }
+	public Usuario buscarUsuario(Integer id) 		 { return (Usuario) this.buscar(usuariosRegistrados, id); 		  }
+	public Oficio buscarOficio(Integer id) 			 { return (Oficio) this.buscar(oficiosRegistrados, id); 		  }
+	public Servicio buscarServicio(Integer id) 		 { return (Servicio) this.buscar(serviciosDisponibles, id); 	  }
+	public Herramienta buscarHerramienta(Integer id) { return (Herramienta) this.buscar(herramientasDisponibles, id); }
+	
+	private Identificable buscar(List<Identificable> lista, Integer id)  
 	{
 		for (Identificable i: lista)
 			if (i.getId() == id)
 				return i;
-		
-		return null; // ver si usar optional
+		return null; // perdoneme profesor
 	}
+	
+	public Trabajador buscarTrabajadorConOficio(Oficio oficio)
+	{
+		Trabajador auxTrabajador;
+		
+		for (Identificable trabajador: trabajadoresRegistrados)
+		{
+			auxTrabajador = (Trabajador) trabajador;
+			if (auxTrabajador.getOficio().equals(oficio))
+				return auxTrabajador;
+		}
+		return null; // perdoneme profesor
+	}
+	
+	
 	
 }

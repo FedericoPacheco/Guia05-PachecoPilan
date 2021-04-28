@@ -13,12 +13,11 @@ public class Alquiler implements Contratable, Identificable
 	private Herramienta herramienta;
 	private ReparaFix app;
 	
-	public Alquiler(LocalDate diaDeInicio, LocalDate diaDeFinalizacion, LocalDate diaDeDevolucion, Herramienta herramienta, ReparaFix app) 
+	public Alquiler(LocalDate diaDeInicio, LocalDate diaDeFinalizacion, Herramienta herramienta, ReparaFix app) 
 	{
 		this.id = contadorIds++;
 		this.diaDeInicio = diaDeInicio;
 		this.diaDeFinalizacion = diaDeFinalizacion;
-		this.diaDeDevolucion = diaDeDevolucion;
 		this.herramienta = herramienta;
 		this.app = app;
 	}

@@ -17,9 +17,9 @@ public class Oficio implements Identificable
 	}
 
 	@Override
-	public Integer getId() {
-		return id;
-	}
+	public Integer getId() { return id; }
+	
+	public Boolean equals(Oficio otroOficio) { return this.id == otroOficio.getId(); }
 
 	
 }

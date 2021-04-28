@@ -21,4 +21,6 @@ public abstract class Servicio implements Identificable
 	public Integer getId(){
 		return id;
 	}
+	
+	public abstract Trabajo contratarTrabajo(Boolean esUrgente);
 }

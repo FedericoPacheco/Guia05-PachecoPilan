@@ -8,16 +8,11 @@ public class TrabajoPersonalizado extends Trabajo
 	private Double costoDeMateriales;
 	private Double costoDeTransporte;
 	
-	public TrabajoPersonalizado(LocalDate diaDeFinalizacion, Boolean esUrgente, Servicio servicio, ReparaFix app)
+	public TrabajoPersonalizado(Boolean esUrgente, Servicio servicio, Trabajador trabajador, ReparaFix app)
 	{
-		super(diaDeFinalizacion, esUrgente, servicio, app);
+		super(esUrgente, servicio, trabajador, app);
 	}
 	
-	@Override
-	public void contratar() {
-		// TODO Auto-generated method stub
-		
-	}
 	@Override
 	public Boolean fueFinalizado() {
 		// TODO Auto-generated method stub

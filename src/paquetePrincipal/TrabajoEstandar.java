@@ -4,15 +4,9 @@ import java.time.LocalDate;
 
 public class TrabajoEstandar extends Trabajo
 {
-	public TrabajoEstandar(LocalDate diaDeFinalizacion, Boolean esUrgente, Servicio servicio, ReparaFix app)
+	public TrabajoEstandar(Boolean esUrgente, Servicio servicio, Trabajador trabajador, ReparaFix app)
 	{
-		super(diaDeFinalizacion, esUrgente, servicio, app);
-	}
-	
-	@Override
-	public void contratar() {
-		// TODO Auto-generated method stub
-		
+		super(esUrgente, servicio, trabajador, app);
 	}
 
 	@Override
