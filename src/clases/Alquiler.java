@@ -59,13 +59,13 @@ public class Alquiler implements Contratable, Identificable
 		LocalDateTime auxDiaDeFinalizacion = diaDeFinalizacion.atStartOfDay();
 		
 		if (this.enMora()) // No se consideran multas.
-			cantidadDeDias = Duration.between(auxDiaDeFinalizacion, auxDiaDeInicio).toDays();
+			cantidadDeDias = Duration.between(auxDiaDeInicio, auxDiaDeFinalizacion).toDays();
 		else
-			if (this.fueFinalizado()) // Se devolvio la herramienta antes de tiempo.
-				cantidadDeDias = Duration.between(diaDeDevolucion.atStartOfDay(), auxDiaDeInicio).toDays();
-			else // Precio a dia de hoy.
-				cantidadDeDias = Duration.between(hoy, auxDiaDeInicio).toDays();
+			if (this.fueFinalizado()) 
+				cantidadDeDias = Duration.between(auxDiaDeInicio, diaDeDevolucion.atStartOfDay()).toDays();
+			else 
+				cantidadDeDias = Duration.between(auxDiaDeInicio, hoy).toDays();
 		
-		return Math.abs(cantidadDeDias * herramienta.getCostoPorDia());
+		return cantidadDeDias * herramienta.getCostoPorDia();
 	}
 }

@@ -9,18 +9,42 @@ import excepciones.SinTrabajadoresDisponiblesException;
 public class Pruebas 
 {
 	static ReparaFix reparaFix;
-	static Trabajador trabajador1, trabajador2, trabajador3;
 	static Usuario usuario1;
-	static Oficio oficio1, oficio2, oficio3;
-	static Servicio servicio1, servicio2, servicio3;
-	static Herramienta herramienta1, herramienta2, herramienta3;
 	
 	public static void main (String args[])
 	{
+		cargarDatos();
+		contratacionTrabajos();
+		contratacionAlquileres();
+		calculoCostos();
+	}
+	
+	private static void calculoCostos()
+	{
+		System.out.println("Costo contratables: $ " + usuario1.calcularCostoContratables(LocalDate.now().getMonthValue()));
+	}
+	
+	private static void contratacionAlquileres()
+	{
+		LocalDate hoy = LocalDate.now();
+		
+		try
+		{
+			usuario1.contratar(1, 2, hoy.minusDays(2));
+			//usuario1.contratar(1, 1, hoy.minusDays(1));
+			usuario1.contratar(2, 3, hoy.minusDays(3));
+			usuario1.devolverHerramienta(2, hoy);
+			usuario1.contratar(3, 4, hoy.minusDays(5));
+		}
+		catch (AlquilerNoEntregadoException e3) 	  { System.out.println(e3.getMessage()); }
+		catch (HerramientaYaAlquiladaException e4)    { System.out.println(e4.getMessage()); }
+		catch (IdentificableNoEncontradoException e5) { System.out.println(e5.getMessage()); }
+	}
+	
+	private static void contratacionTrabajos() 
+	{
 		LocalDate hoy = LocalDate.now();
 		TrabajoPersonalizado trabajoPersonalizado1;
-		
-		cargarDatos();
 		
 		try
 		{
@@ -35,22 +59,15 @@ public class Pruebas
 		}
 		catch (SinTrabajadoresDisponiblesException e1) { System.out.println(e1.getMessage()); }
 		catch (IdentificableNoEncontradoException e2)  { System.out.println(e2.getMessage()); }
-		
-		try
-		{
-			usuario1.contratar(1, 2, hoy.minusDays(2));
-			usuario1.contratar(2, 3, hoy.minusDays(3));
-			usuario1.contratar(3, 4, hoy);
-		}
-		catch (AlquilerNoEntregadoException e3) 	  { System.out.println(e3.getMessage()); }
-		catch (HerramientaYaAlquiladaException e4)    { System.out.println(e4.getMessage()); }
-		catch (IdentificableNoEncontradoException e5) { System.out.println(e5.getMessage()); }
-		
-		System.out.println("Costo contratables: $ " + usuario1.calcularCostoContratables(hoy.getMonthValue()));
 	}
 	
 	private static void cargarDatos()
 	{
+		Oficio oficio1, oficio2, oficio3;
+		Servicio servicio1, servicio2, servicio3;
+		Herramienta herramienta1, herramienta2, herramienta3;
+		Trabajador trabajador1, trabajador2, trabajador3;
+		
 		reparaFix = new ReparaFix();
 		
 		oficio1 = new Oficio("Reparador de aire acondicionado", reparaFix);

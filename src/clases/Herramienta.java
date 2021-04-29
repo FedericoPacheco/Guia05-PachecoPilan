@@ -42,6 +42,7 @@ public class Herramienta implements Identificable
 		{
 			auxAlquiler = new Alquiler(diaDeInicio, diaDeFinalizacion, this, app);
 			app.agregarAlquiler(auxAlquiler);
+			this.alquiler = auxAlquiler;
 			return auxAlquiler;
 		}
 		else
