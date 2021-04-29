@@ -18,6 +18,7 @@ public class Pruebas
 	public static void main (String args[])
 	{
 		LocalDate hoy = LocalDate.now();
+		TrabajoPersonalizado trabajoPersonalizado1;
 		
 		cargarDatos();
 		
@@ -26,20 +27,24 @@ public class Pruebas
 			usuario1.contratar(1, hoy, false);
 			usuario1.contratar(2, hoy, true);
 			usuario1.contratar(3, hoy, false);
+			
+			trabajoPersonalizado1 = (TrabajoPersonalizado) reparaFix.buscarTrabajo(3);
+			trabajoPersonalizado1.setValorPresupuestado(50000.0);
+			trabajoPersonalizado1.setCostoDeMateriales(100000.0);
+			trabajoPersonalizado1.setCostoDeTransporte(5000.0);
 		}
 		catch (SinTrabajadoresDisponiblesException e1) { System.out.println(e1.getMessage()); }
 		catch (IdentificableNoEncontradoException e2)  { System.out.println(e2.getMessage()); }
 		
 		try
 		{
-			usuario1.contratar(1, 2, hoy);
-			usuario1.contratar(2, 3, hoy);
+			usuario1.contratar(1, 2, hoy.minusDays(2));
+			usuario1.contratar(2, 3, hoy.minusDays(3));
 			usuario1.contratar(3, 4, hoy);
 		}
 		catch (AlquilerNoEntregadoException e3) 	  { System.out.println(e3.getMessage()); }
 		catch (HerramientaYaAlquiladaException e4)    { System.out.println(e4.getMessage()); }
 		catch (IdentificableNoEncontradoException e5) { System.out.println(e5.getMessage()); }
-
 		
 		System.out.println("Costo contratables: $ " + usuario1.calcularCostoContratables(hoy.getMonthValue()));
 	}
@@ -70,7 +75,6 @@ public class Pruebas
 		
 		servicio1 = new ServicioEstandar("Colocacion de gas", oficio1, reparaFix, 2718.281828);
 		servicio2 = new ServicioEstandar("Cambio de cerradura", oficio2, reparaFix, 3141.592);
-		
 		servicio3 = new ServicioPersonalizado("Realizacion de instalacion de gas", oficio3, reparaFix);
 		
 		reparaFix.agregarServicio(servicio1);

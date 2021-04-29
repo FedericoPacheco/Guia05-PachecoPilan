@@ -13,6 +13,6 @@ public class SinTrabajadoresDisponiblesException extends Exception
 	{
 		// https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html
 		// Muestra la fecha en formato anglosajon, pero bueno; es mas sencillo.
-		super("Error. No hay trabajadores disponibles del oficio: " + oficio.getNombre() + " para el dia: " + DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(dia));
+		super("Error. No hay trabajadores disponibles del oficio: " + oficio.getNombre() + " para el dia: " + DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(dia) + ".");
 	}
 }

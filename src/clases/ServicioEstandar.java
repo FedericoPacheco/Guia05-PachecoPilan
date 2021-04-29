@@ -33,7 +33,7 @@ public class ServicioEstandar extends Servicio
 		
 		auxTrabajador = auxOptionalTrabajador.get();
 		auxTrabajoEstandar = new TrabajoEstandar(esUrgente, diaDeInicio, this, auxTrabajador, app);
-		app.agregarContratable(auxTrabajoEstandar);
+		app.agregarTrabajo(auxTrabajoEstandar);
 		auxTrabajador.agregarTrabajo(auxTrabajoEstandar);
 		
 		return auxTrabajoEstandar;

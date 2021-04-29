@@ -31,7 +31,7 @@ public class ServicioPersonalizado extends Servicio
 		
 		auxTrabajador = auxOptionalTrabajador.get();
 		auxTrabajoPersonalizado = new TrabajoPersonalizado(esUrgente, diaDeInicio, this, auxTrabajador, app);
-		app.agregarContratable(auxTrabajoPersonalizado);
+		app.agregarTrabajo(auxTrabajoPersonalizado);
 		auxTrabajador.agregarTrabajo(auxTrabajoPersonalizado);
 		
 		return auxTrabajoPersonalizado;

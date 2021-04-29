@@ -20,7 +20,7 @@ public class Usuario implements Identificable
 	private String nombreUsuario;
 	private String correoElectronico;
 	private String contrasenia;
-	private Integer cantidadAlquileresHechos;
+	private Integer cantidadDeAlquileresHechos;
 	private List<Contratable> contratables;
 	private ReparaFix app;
 	
@@ -32,7 +32,7 @@ public class Usuario implements Identificable
 		this.contrasenia = contrasenia;
 		this.app = app;
 		this.contratables = new LinkedList<Contratable>();
-		this.cantidadAlquileresHechos = 0;
+		this.cantidadDeAlquileresHechos = 0;
 	}
 	
 	public void contratar(Integer idServicio, LocalDate diaDeInicio, Boolean esUrgente) throws SinTrabajadoresDisponiblesException, IdentificableNoEncontradoException
@@ -50,14 +50,21 @@ public class Usuario implements Identificable
 		Alquiler auxAlquiler;
 		Herramienta auxHerramienta;
 		
-		if (cantidadAlquileresHechos == maximaCantidadAlquileresEnSimultaneo)
+		if (cantidadDeAlquileresHechos == maximaCantidadAlquileresEnSimultaneo)
 			throw new AlquilerNoEntregadoException();
 		else
 		{
 			auxHerramienta = app.buscarHerramienta(idHerramienta);
 			auxAlquiler = auxHerramienta.contratarAlquiler(cantidadDeDias, diaDeInicio);
 			contratables.add(auxAlquiler);
+			cantidadDeAlquileresHechos++;
 		}
+	}
+	
+	public void devolverHerramienta(Integer idAlquiler, LocalDate dia) throws IdentificableNoEncontradoException
+	{
+		app.buscarAlquiler(idAlquiler).setDiaDeDevolucion(dia);
+		this.cantidadDeAlquileresHechos--;
 	}
 	
 	public Double calcularCostoContratables(Integer mes)

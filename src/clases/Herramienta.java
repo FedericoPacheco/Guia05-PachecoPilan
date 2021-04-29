@@ -41,7 +41,7 @@ public class Herramienta implements Identificable
 		if (!this.estaAlquilada())
 		{
 			auxAlquiler = new Alquiler(diaDeInicio, diaDeFinalizacion, this, app);
-			app.agregarContratable(auxAlquiler);
+			app.agregarAlquiler(auxAlquiler);
 			return auxAlquiler;
 		}
 		else

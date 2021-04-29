@@ -42,30 +42,30 @@ public class Alquiler implements Contratable, Identificable
 	public LocalDate getDiaDeDevolucion() 	{ return diaDeDevolucion;   }
 	public Herramienta getHerramienta() 	{ return herramienta; 		}
 	
-	public void setDiaDeDevolucion(LocalDate diaDeDevolucion) 	  {	this.diaDeDevolucion = diaDeDevolucion; 	}
+	public void setDiaDeDevolucion(LocalDate diaDeDevolucion) {	this.diaDeDevolucion = diaDeDevolucion; }
 	
 	@Override
 	public Integer getId()		   { return id; 						  }
 	public Integer getMes() 	   { return diaDeInicio.getMonthValue();  }
 	public Boolean fueFinalizado() { return diaDeDevolucion != null; 	  }
 	
-	public Double calcularCosto() // No contempla los casos en los que la devolucion / finalizacion es en el mismo dia que inicio (igualmente seria absurdo).
+	public Double calcularCosto() 
 	{
 		// https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html
+		// https://stackoverflow.com/a/48732307
 		Long cantidadDeDias;
-		LocalDate hoy = LocalDate.now();
+		LocalDateTime hoy = LocalDateTime.now();
+		LocalDateTime auxDiaDeInicio = diaDeInicio.atStartOfDay();
+		LocalDateTime auxDiaDeFinalizacion = diaDeFinalizacion.atStartOfDay();
 		
-		if (this.enMora()) 																// No se consideran multas.
-			cantidadDeDias = Duration.between(diaDeFinalizacion, diaDeInicio).toDays();
+		if (this.enMora()) // No se consideran multas.
+			cantidadDeDias = Duration.between(auxDiaDeFinalizacion, auxDiaDeInicio).toDays();
 		else
-			if (this.fueFinalizado()) 											    	// Se devolvio la herramienta antes de tiempo.
-				cantidadDeDias = Duration.between(diaDeDevolucion, diaDeInicio).toDays();
-			else   																		// Precio a dia de hoy.
-				if (hoy.equals(diaDeInicio))
-					cantidadDeDias = 0L;
-				else
-					cantidadDeDias = Duration.between(hoy, diaDeInicio).toDays();
+			if (this.fueFinalizado()) // Se devolvio la herramienta antes de tiempo.
+				cantidadDeDias = Duration.between(diaDeDevolucion.atStartOfDay(), auxDiaDeInicio).toDays();
+			else // Precio a dia de hoy.
+				cantidadDeDias = Duration.between(hoy, auxDiaDeInicio).toDays();
 		
-		return cantidadDeDias * herramienta.getCostoPorDia();
+		return Math.abs(cantidadDeDias * herramienta.getCostoPorDia());
 	}
 }

@@ -10,9 +10,10 @@ import excepciones.SinTrabajadoresDisponiblesException;
 import interfaces.Contratable;
 import interfaces.Identificable;
 
-public class ReparaFix // App
+public class ReparaFix
 {
-	private List<Identificable> contratablesRealizados;
+	private List<Identificable> trabajosRealizados;
+	private List<Identificable> alquileresRealizados;
 	private List<Identificable> trabajadoresRegistrados;
 	private List<Identificable> usuariosRegistrados;
 	private List<Identificable> oficiosRegistrados;
@@ -21,7 +22,8 @@ public class ReparaFix // App
 	
 	public ReparaFix() 
 	{
-		contratablesRealizados  = new LinkedList<Identificable>();
+		alquileresRealizados    = new LinkedList<Identificable>();
+		trabajosRealizados      = new LinkedList<Identificable>();
 		trabajadoresRegistrados = new LinkedList<Identificable>();
 		usuariosRegistrados 	= new LinkedList<Identificable>();
 		oficiosRegistrados 		= new LinkedList<Identificable>();
@@ -29,14 +31,16 @@ public class ReparaFix // App
 		herramientasDisponibles = new LinkedList<Identificable>();
 	}
 	
-	public void agregarContratable(Contratable contratable)  { contratablesRealizados.add((Identificable) contratable); }
-	public void agregarTrabajador(Trabajador trabajador)	 { trabajadoresRegistrados.add(trabajador); 			    }
-	public void agregarUsuario(Usuario usuario) 			 { usuariosRegistrados.add(usuario);			   		    }
-	public void agregarOficio(Oficio oficio) 				 { oficiosRegistrados.add(oficio); 						    }
-	public void agregarServicio(Servicio servicio) 			 { serviciosDisponibles.add(servicio); 					    }
-	public void agregarHerramienta(Herramienta herramienta)  { herramientasDisponibles.add(herramienta); 			    }
+	public void agregarTrabajo(Trabajo trabajo)				{ trabajosRealizados.add(trabajo);          }
+	public void agregarAlquiler(Alquiler alquiler)		    { alquileresRealizados.add(alquiler);       }
+	public void agregarTrabajador(Trabajador trabajador)	{ trabajadoresRegistrados.add(trabajador);  }
+	public void agregarUsuario(Usuario usuario) 			{ usuariosRegistrados.add(usuario);		    }
+	public void agregarOficio(Oficio oficio) 				{ oficiosRegistrados.add(oficio);    	    }
+	public void agregarServicio(Servicio servicio) 		    { serviciosDisponibles.add(servicio);	    }
+	public void agregarHerramienta(Herramienta herramienta) { herramientasDisponibles.add(herramienta); }
 	
-	public Contratable buscarContratable(Integer id) throws IdentificableNoEncontradoException { return (Contratable) this.buscar(contratablesRealizados, id);  }
+	public Trabajo buscarTrabajo(Integer id)         throws IdentificableNoEncontradoException { return (Trabajo) this.buscar(trabajosRealizados, id);  		}
+	public Alquiler buscarAlquiler(Integer id)       throws IdentificableNoEncontradoException { return (Alquiler) this.buscar(alquileresRealizados, id);  		}
 	public Trabajador buscarTrabajador(Integer id)   throws IdentificableNoEncontradoException { return (Trabajador) this.buscar(trabajadoresRegistrados, id);  }
 	public Usuario buscarUsuario(Integer id) 		 throws IdentificableNoEncontradoException { return (Usuario) this.buscar(usuariosRegistrados, id); 		}
 	public Oficio buscarOficio(Integer id) 			 throws IdentificableNoEncontradoException { return (Oficio) this.buscar(oficiosRegistrados, id); 		    }
