@@ -11,6 +11,9 @@ public class TrabajoPersonalizado extends Trabajo
 	public TrabajoPersonalizado(Boolean esUrgente, LocalDate diaDeInicio, Servicio servicio, Trabajador trabajador, ReparaFix app)
 	{
 		super(esUrgente, diaDeInicio, servicio, trabajador, app);
+		this.valorPresupuestado = 0.0;
+		this.costoDeMateriales = 0.0;
+		this.costoDeTransporte = 0.0;
 	}
 	
 	public Double getValorPresupuestado() {	return valorPresupuestado; }

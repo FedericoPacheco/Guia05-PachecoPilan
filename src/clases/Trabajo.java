@@ -51,8 +51,9 @@ public abstract class Trabajo implements Contratable, Identificable
 	public void setDiaDeFinalizacion(LocalDate diaDeFinalizacion) { this.diaDeFinalizacion = diaDeFinalizacion; };
 
 	@Override
-	public Boolean fueFinalizado() { return diaDeFinalizacion != null; }
-	public Integer getId() { return id; }
+	public Integer getId()		   { return id; 						  }
+	public Integer getMes() 	   { return diaDeInicio.getMonthValue();  }
+	public Boolean fueFinalizado() { return diaDeFinalizacion != null; 	  }
 	public Double multiplicadorPorUrgencia() 
 	{
 		Double auxDouble = 1.0;

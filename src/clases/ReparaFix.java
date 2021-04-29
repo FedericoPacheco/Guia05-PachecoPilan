@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import excepciones.IdentificableNoEncontradoException;
 import excepciones.SinTrabajadoresDisponiblesException;
 import interfaces.Contratable;
 import interfaces.Identificable;
@@ -35,19 +36,20 @@ public class ReparaFix // App
 	public void agregarServicio(Servicio servicio) 			 { serviciosDisponibles.add(servicio); 					    }
 	public void agregarHerramienta(Herramienta herramienta)  { herramientasDisponibles.add(herramienta); 			    }
 	
-	public Contratable buscarContratable(Integer id) { return (Contratable) this.buscar(contratablesRealizados, id);  }
-	public Trabajador buscarTrabajador(Integer id)   { return (Trabajador) this.buscar(trabajadoresRegistrados, id);  }
-	public Usuario buscarUsuario(Integer id) 		 { return (Usuario) this.buscar(usuariosRegistrados, id); 		  }
-	public Oficio buscarOficio(Integer id) 			 { return (Oficio) this.buscar(oficiosRegistrados, id); 		  }
-	public Servicio buscarServicio(Integer id) 		 { return (Servicio) this.buscar(serviciosDisponibles, id); 	  }
-	public Herramienta buscarHerramienta(Integer id) { return (Herramienta) this.buscar(herramientasDisponibles, id); }
+	public Contratable buscarContratable(Integer id) throws IdentificableNoEncontradoException { return (Contratable) this.buscar(contratablesRealizados, id);  }
+	public Trabajador buscarTrabajador(Integer id)   throws IdentificableNoEncontradoException { return (Trabajador) this.buscar(trabajadoresRegistrados, id);  }
+	public Usuario buscarUsuario(Integer id) 		 throws IdentificableNoEncontradoException { return (Usuario) this.buscar(usuariosRegistrados, id); 		}
+	public Oficio buscarOficio(Integer id) 			 throws IdentificableNoEncontradoException { return (Oficio) this.buscar(oficiosRegistrados, id); 		    }
+	public Servicio buscarServicio(Integer id) 		 throws IdentificableNoEncontradoException { return (Servicio) this.buscar(serviciosDisponibles, id); 	    }
+	public Herramienta buscarHerramienta(Integer id) throws IdentificableNoEncontradoException { return (Herramienta) this.buscar(herramientasDisponibles, id); }
 	
-	private Identificable buscar(List<Identificable> lista, Integer id)  
+	private Identificable buscar(List<Identificable> lista, Integer id) throws IdentificableNoEncontradoException  
 	{
-		for (Identificable i: lista)
-			if (i.getId() == id)
-				return i;
-		return null; // perdoneme profesor
+		for (Identificable identificable: lista)
+			if (identificable.getId() == id)
+				return identificable;
+		
+		throw new IdentificableNoEncontradoException();
 	}
 	
 	public Optional<Trabajador> buscarTrabajadorConOficio(Oficio oficio, LocalDate diaDeInicio, Boolean esUrgente) throws SinTrabajadoresDisponiblesException

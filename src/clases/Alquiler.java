@@ -2,6 +2,7 @@ package clases;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import interfaces.Contratable;
 import interfaces.Identificable;
@@ -28,8 +29,11 @@ public class Alquiler implements Contratable, Identificable
 	
 	public Boolean enMora() 
 	{ 
-		return (diaDeDevolucion.isAfter(diaDeFinalizacion) ||
-				LocalDate.now().isAfter(diaDeFinalizacion)); 
+		if (!this.fueFinalizado())
+			return LocalDate.now().isAfter(diaDeFinalizacion);
+		else
+			return diaDeDevolucion.isAfter(diaDeFinalizacion);
+			 
 	}
 	public void setDiaDeDevolucion() { diaDeDevolucion = LocalDate.now(); }
 	
@@ -41,21 +45,27 @@ public class Alquiler implements Contratable, Identificable
 	public void setDiaDeDevolucion(LocalDate diaDeDevolucion) 	  {	this.diaDeDevolucion = diaDeDevolucion; 	}
 	
 	@Override
-	public Integer getId(){ return id; }
-	public Boolean fueFinalizado() { return diaDeDevolucion != null; }
-	public Double calcularCosto() 
+	public Integer getId()		   { return id; 						  }
+	public Integer getMes() 	   { return diaDeInicio.getMonthValue();  }
+	public Boolean fueFinalizado() { return diaDeDevolucion != null; 	  }
+	
+	public Double calcularCosto() // No contempla los casos en los que la devolucion / finalizacion es en el mismo dia que inicio (igualmente seria absurdo).
 	{
 		// https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html
-		Long auxLong;
+		Long cantidadDeDias;
+		LocalDate hoy = LocalDate.now();
 		
-		if (this.enMora()) 															// No se consideran multas.
-			auxLong = Duration.between(diaDeFinalizacion, diaDeInicio).toDays();
+		if (this.enMora()) 																// No se consideran multas.
+			cantidadDeDias = Duration.between(diaDeFinalizacion, diaDeInicio).toDays();
 		else
-			if (this.fueFinalizado()) 											    // Se devolvio la herramienta antes de tiempo.
-				auxLong = Duration.between(diaDeDevolucion, diaDeInicio).toDays();
-			else   																	// Precio a dia de hoy.
-				auxLong = Duration.between(LocalDate.now(), diaDeInicio).toDays();
+			if (this.fueFinalizado()) 											    	// Se devolvio la herramienta antes de tiempo.
+				cantidadDeDias = Duration.between(diaDeDevolucion, diaDeInicio).toDays();
+			else   																		// Precio a dia de hoy.
+				if (hoy.equals(diaDeInicio))
+					cantidadDeDias = 0L;
+				else
+					cantidadDeDias = Duration.between(hoy, diaDeInicio).toDays();
 		
-		return auxLong * herramienta.getCostoPorDia();
+		return cantidadDeDias * herramienta.getCostoPorDia();
 	}
 }
