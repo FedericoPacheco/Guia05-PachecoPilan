@@ -4,16 +4,15 @@ import interfaces.Identificable;
 
 public class Oficio implements Identificable
 {
-	private static Integer contadorIds = 0;
+	private static Integer contadorIds = 1;
 	
 	private Integer id;
 	private String nombre;
 	private ReparaFix app;
 	
-	public Oficio(Integer id, String nombre, ReparaFix app) 
+	public Oficio(String nombre, ReparaFix app) 
 	{
 		this.id = contadorIds++;
-		this.id = id;
 		this.nombre = nombre;
 		this.app = app;
 	}

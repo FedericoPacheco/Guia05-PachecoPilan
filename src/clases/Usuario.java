@@ -5,13 +5,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 import excepciones.AlquilerNoEntregadoException;
+import excepciones.HerramientaYaAlquiladaException;
 import excepciones.SinTrabajadoresDisponiblesException;
 import interfaces.Contratable;
 import interfaces.Identificable;
 
 public class Usuario implements Identificable
 {
-	static private Integer contadorIds = 0;
+	static private Integer contadorIds = 1;
 	static public final Integer maximaCantidadAlquileresEnSimultaneo = 2;
 	
 	private Integer id;
@@ -43,7 +44,7 @@ public class Usuario implements Identificable
 		contratables.add(auxTrabajo);
 	}
 	
-	public void contratar(Integer idHerramienta, Integer cantidadDeDias, LocalDate diaDeInicio) throws AlquilerNoEntregadoException
+	public void contratar(Integer idHerramienta, Integer cantidadDeDias, LocalDate diaDeInicio) throws AlquilerNoEntregadoException, HerramientaYaAlquiladaException
 	{
 		Alquiler auxAlquiler;
 		Herramienta auxHerramienta;

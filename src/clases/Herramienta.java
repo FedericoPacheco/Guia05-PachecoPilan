@@ -2,15 +2,17 @@ package clases;
 
 import java.time.LocalDate;
 
+import excepciones.HerramientaYaAlquiladaException;
 import interfaces.Identificable;
 
 public class Herramienta implements Identificable
 {
-	private static Integer contadorIds = 0;
+	private static Integer contadorIds = 1;
 	
 	private Integer id;
 	private String nombre;
 	private Double costoPorDia;
+	private Alquiler alquiler;
 	private ReparaFix app;
 	
 	public Herramienta(String nombre, Double costoPorDia, ReparaFix app) 
@@ -21,21 +23,29 @@ public class Herramienta implements Identificable
 		this.app = app;
 	}
 
+	public Boolean estaAlquilada() { return alquiler != null; }
+	
 	public Double getCostoPorDia() { return costoPorDia; }
 	public String getNombre() 	   { return nombre; 	 }
-
+	public Alquiler getAlquiler()  { return alquiler;    }
+	
 	public void setCostoPorDia(Double costoPorDia) { this.costoPorDia = costoPorDia; }
 
 	@Override
 	public Integer getId() { return id; }
-	public Alquiler contratarAlquiler(Integer cantidadDeDias, LocalDate diaDeInicio)
+	public Alquiler contratarAlquiler(Integer cantidadDeDias, LocalDate diaDeInicio) throws HerramientaYaAlquiladaException
 	{
 		Alquiler auxAlquiler;
 		LocalDate diaDeFinalizacion = diaDeInicio.plusDays(cantidadDeDias);
 		
-		auxAlquiler = new Alquiler(diaDeInicio, diaDeFinalizacion, this, app);
-		app.agregarContratable(auxAlquiler);
+		if (!this.estaAlquilada())
+		{
+			auxAlquiler = new Alquiler(diaDeInicio, diaDeFinalizacion, this, app);
+			app.agregarContratable(auxAlquiler);
+			return auxAlquiler;
+		}
+		else
+			throw new HerramientaYaAlquiladaException(id, nombre);
 		
-		return auxAlquiler;
 	}
 }

@@ -3,6 +3,7 @@ package clases;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import excepciones.SinTrabajadoresDisponiblesException;
 import interfaces.Contratable;
@@ -49,7 +50,7 @@ public class ReparaFix // App
 		return null; // perdoneme profesor
 	}
 	
-	public Trabajador buscarTrabajadorConOficio(Oficio oficio, LocalDate diaDeInicio) throws SinTrabajadoresDisponiblesException
+	public Optional<Trabajador> buscarTrabajadorConOficio(Oficio oficio, LocalDate diaDeInicio, Boolean esUrgente) throws SinTrabajadoresDisponiblesException
 	{
 		Trabajador auxTrabajador = null;
 		Integer i = 0;
@@ -64,10 +65,13 @@ public class ReparaFix // App
 				i++;
 		}
 		
-		if (trabajadorEncontrado)
-			return auxTrabajador;
+		if (!esUrgente)
+			return Optional.of(auxTrabajador);
 		else
-			throw new SinTrabajadoresDisponiblesException(oficio, diaDeInicio);
+			if (auxTrabajador == null)
+				throw new SinTrabajadoresDisponiblesException(oficio, diaDeInicio);
+			else
+				return Optional.of(auxTrabajador);
 	}
 			
 	

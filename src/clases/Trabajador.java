@@ -8,7 +8,7 @@ import interfaces.Identificable;
 
 public class Trabajador implements Identificable
 {
-	private static Integer contadorIds = 0;
+	private static Integer contadorIds = 1;
 	
 	private Integer id;
 	private String nombre;

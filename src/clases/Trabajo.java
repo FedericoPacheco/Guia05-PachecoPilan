@@ -7,7 +7,7 @@ import interfaces.Identificable;
 
 public abstract class Trabajo implements Contratable, Identificable
 {
-	static protected Integer contadorIds = 0;
+	static protected Integer contadorIds = 1;
 	static protected Double porcentajeExtraPorUrgencia = 0.5;
 	
 	protected Integer id;

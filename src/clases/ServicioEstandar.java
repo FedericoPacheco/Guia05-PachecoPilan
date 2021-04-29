@@ -1,6 +1,7 @@
 package clases;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import excepciones.SinTrabajadoresDisponiblesException;
 
@@ -17,15 +18,25 @@ public class ServicioEstandar extends Servicio
 	@Override
 	public Trabajo contratarTrabajo(LocalDate diaDeInicio, Boolean esUrgente) throws SinTrabajadoresDisponiblesException 
 	{
-		TrabajoEstandar auxTrabajo;
+		TrabajoEstandar auxTrabajoEstandar;
 		Trabajador auxTrabajador;
 		
-		auxTrabajador = app.buscarTrabajadorConOficio(oficio, diaDeInicio);
-		auxTrabajo = new TrabajoEstandar(esUrgente, diaDeInicio, this, auxTrabajador, app);
-		app.agregarContratable(auxTrabajo);
-		auxTrabajador.agregarTrabajo(auxTrabajo);
+		LocalDate dia = diaDeInicio;
+		Optional<Trabajador> auxOptionalTrabajador = app.buscarTrabajadorConOficio(oficio, dia, esUrgente);
 		
-		return auxTrabajo;
+		if(!esUrgente)
+			while(auxOptionalTrabajador.isEmpty()) // si no es urgente seguir buscando en los sucesivos dias hasta encontrar un trabajador
+			{
+				dia = dia.plusDays(1);
+				auxOptionalTrabajador = app.buscarTrabajadorConOficio(oficio, dia, esUrgente);
+			}
+		
+		auxTrabajador = auxOptionalTrabajador.get();
+		auxTrabajoEstandar = new TrabajoEstandar(esUrgente, diaDeInicio, this, auxTrabajador, app);
+		app.agregarContratable(auxTrabajoEstandar);
+		auxTrabajador.agregarTrabajo(auxTrabajoEstandar);
+		
+		return auxTrabajoEstandar;
 	}
 	
 	public void setMonto(Double monto) { this.monto = monto; }

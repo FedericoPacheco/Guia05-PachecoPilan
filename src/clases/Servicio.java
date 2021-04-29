@@ -7,7 +7,7 @@ import interfaces.Identificable;
 
 public abstract class Servicio implements Identificable
 {
-	protected static Integer contadorIds = 0;
+	protected static Integer contadorIds = 1;
 	
 	protected Integer id;
 	protected String nombre;

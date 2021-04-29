@@ -8,7 +8,7 @@ import interfaces.Identificable;
 
 public class Alquiler implements Contratable, Identificable
 {
-	private static Integer contadorIds = 0;
+	private static Integer contadorIds = 1;
 	
 	private Integer id;
 	private LocalDate diaDeInicio;
