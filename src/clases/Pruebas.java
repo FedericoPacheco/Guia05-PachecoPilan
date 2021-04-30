@@ -6,10 +6,11 @@ import excepciones.HerramientaYaAlquiladaException;
 import excepciones.IdentificableNoEncontradoException;
 import excepciones.SinTrabajadoresDisponiblesException;
 
+// https://stackoverflow.com/questions/4388192/eclipse-doesnt-stop-at-breakpoints
 public class Pruebas 
 {
 	static ReparaFix reparaFix;
-	static Usuario usuario1;
+	static Usuario usuario1, usuario2;
 	
 	public static void main (String args[])
 	{
@@ -21,7 +22,8 @@ public class Pruebas
 	
 	private static void calculoCostos()
 	{
-		System.out.println("Costo contratables: $ " + usuario1.calcularCostoContratables(LocalDate.now().getMonthValue()));
+		System.out.println("Costo contratables usuario1: $ " + usuario1.calcularCostoContratables(LocalDate.now().getMonthValue()));
+		System.out.println("Costo contratables usuario2: $ " + usuario2.calcularCostoContratables(LocalDate.now().getMonthValue()));
 	}
 	
 	private static void contratacionAlquileres()
@@ -56,6 +58,9 @@ public class Pruebas
 			trabajoPersonalizado1.setValorPresupuestado(50000.0);
 			trabajoPersonalizado1.setCostoDeMateriales(100000.0);
 			trabajoPersonalizado1.setCostoDeTransporte(5000.0);
+			
+			usuario2.contratar(1, hoy, false);
+			usuario2.contratar(2, hoy, true);
 		}
 		catch (SinTrabajadoresDisponiblesException e1) { System.out.println(e1.getMessage()); }
 		catch (IdentificableNoEncontradoException e2)  { System.out.println(e2.getMessage()); }
@@ -87,8 +92,10 @@ public class Pruebas
 		reparaFix.agregarTrabajador(trabajador3);
 		
 		usuario1 = new Usuario("Federico Pacheco", "fedepacheco2112@gmail.com", "TDAmeritrade137", reparaFix);
+		usuario2 = new Usuario("Sir Isaac Newton", "i_newton@gmail.com", "gravitacionUniversal", reparaFix);
 		
 		reparaFix.agregarUsuario(usuario1);
+		reparaFix.agregarUsuario(usuario2);
 		
 		servicio1 = new ServicioEstandar("Colocacion de gas", oficio1, reparaFix, 2718.281828);
 		servicio2 = new ServicioEstandar("Cambio de cerradura", oficio2, reparaFix, 3141.592);

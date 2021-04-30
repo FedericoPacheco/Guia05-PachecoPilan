@@ -16,6 +16,7 @@ public class Alquiler implements Contratable, Identificable
 	private LocalDate diaDeFinalizacion;
 	private LocalDate diaDeDevolucion;
 	private Herramienta herramienta;
+	@SuppressWarnings("unused")
 	private ReparaFix app;
 	
 	public Alquiler(LocalDate diaDeInicio, LocalDate diaDeFinalizacion, Herramienta herramienta, ReparaFix app) 

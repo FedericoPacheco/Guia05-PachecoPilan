@@ -30,7 +30,7 @@ public class ServicioPersonalizado extends Servicio
 			}
 		
 		auxTrabajador = auxOptionalTrabajador.get();
-		auxTrabajoPersonalizado = new TrabajoPersonalizado(esUrgente, diaDeInicio, this, auxTrabajador, app);
+		auxTrabajoPersonalizado = new TrabajoPersonalizado(esUrgente, dia, this, auxTrabajador, app);
 		app.agregarTrabajo(auxTrabajoPersonalizado);
 		auxTrabajador.agregarTrabajo(auxTrabajoPersonalizado);
 		

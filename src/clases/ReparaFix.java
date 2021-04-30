@@ -7,7 +7,6 @@ import java.util.Optional;
 
 import excepciones.IdentificableNoEncontradoException;
 import excepciones.SinTrabajadoresDisponiblesException;
-import interfaces.Contratable;
 import interfaces.Identificable;
 
 public class ReparaFix
@@ -58,26 +57,25 @@ public class ReparaFix
 	
 	public Optional<Trabajador> buscarTrabajadorConOficio(Oficio oficio, LocalDate diaDeInicio, Boolean esUrgente) throws SinTrabajadoresDisponiblesException
 	{
-		Trabajador auxTrabajador = null;
+		Trabajador auxTrabajador, trabajadorResultado = null;
 		Integer i = 0;
-		Boolean trabajadorEncontrado = false;
 		
-		while (i < trabajadoresRegistrados.size() && !trabajadorEncontrado)
+		while (i < trabajadoresRegistrados.size() && trabajadorResultado == null)
 		{
 			auxTrabajador = (Trabajador) trabajadoresRegistrados.get(i);
 			if (auxTrabajador.getOficio().equals(oficio) && !auxTrabajador.agendaOcupada(diaDeInicio))
-				trabajadorEncontrado = true;
+				trabajadorResultado = auxTrabajador;
 			else
 				i++;
 		}
 		
-		if (!esUrgente)
-			return Optional.of(auxTrabajador);
-		else
-			if (auxTrabajador == null)
+		if (trabajadorResultado == null)
+			if (esUrgente)
 				throw new SinTrabajadoresDisponiblesException(oficio, diaDeInicio);
 			else
-				return Optional.of(auxTrabajador);
+				return Optional.ofNullable(trabajadorResultado);
+		else
+			return Optional.of(trabajadorResultado);
 	}
 			
 	

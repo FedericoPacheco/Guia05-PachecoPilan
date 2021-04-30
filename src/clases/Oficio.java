@@ -8,6 +8,7 @@ public class Oficio implements Identificable
 	
 	private Integer id;
 	private String nombre;
+	@SuppressWarnings("unused")
 	private ReparaFix app;
 	
 	public Oficio(String nombre, ReparaFix app) 

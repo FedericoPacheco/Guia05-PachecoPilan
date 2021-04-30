@@ -17,6 +17,7 @@ public class Trabajador implements Identificable
 	private Double porcentajeDeComision;
 	private Oficio oficio;
 	private List<Trabajo> trabajosARealizar;
+	@SuppressWarnings("unused")
 	private ReparaFix app;
 	
 	public Trabajador(String nombre, String correoElectronico, Double costoPorHora, Double porcentajeDeComision, Oficio oficio, ReparaFix app) 
@@ -36,7 +37,7 @@ public class Trabajador implements Identificable
 		Boolean agendaOcupada = false; 
 		Integer i = 0;
 		
-		while (i < trabajosARealizar.size())
+		while (i < trabajosARealizar.size() && !agendaOcupada)
 			if (trabajosARealizar.get(i).diaComprendido(dia))
 				agendaOcupada = true;
 			else

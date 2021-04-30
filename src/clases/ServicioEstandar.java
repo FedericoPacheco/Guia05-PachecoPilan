@@ -16,6 +16,7 @@ public class ServicioEstandar extends Servicio
 	}
 
 	@Override
+	public Double getMonto() { return monto; }
 	public Trabajo contratarTrabajo(LocalDate diaDeInicio, Boolean esUrgente) throws SinTrabajadoresDisponiblesException 
 	{
 		TrabajoEstandar auxTrabajoEstandar;
@@ -32,7 +33,7 @@ public class ServicioEstandar extends Servicio
 			}
 		
 		auxTrabajador = auxOptionalTrabajador.get();
-		auxTrabajoEstandar = new TrabajoEstandar(esUrgente, diaDeInicio, this, auxTrabajador, app);
+		auxTrabajoEstandar = new TrabajoEstandar(esUrgente, dia, this, auxTrabajador, app);
 		app.agregarTrabajo(auxTrabajoEstandar);
 		auxTrabajador.agregarTrabajo(auxTrabajoEstandar);
 		
@@ -40,8 +41,4 @@ public class ServicioEstandar extends Servicio
 	}
 	
 	public void setMonto(Double monto) { this.monto = monto; }
-	
-	@Override
-	public Double getMonto() { return monto; }
-	
 }
