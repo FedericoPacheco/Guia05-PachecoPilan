@@ -18,9 +18,9 @@ public class Trabajador implements Identificable
 	private Oficio oficio;
 	private List<Trabajo> trabajosARealizar;
 	@SuppressWarnings("unused")
-	private ReparaFix app;
+	private ReparaFix reparaFix;
 	
-	public Trabajador(String nombre, String correoElectronico, Double costoPorHora, Double porcentajeDeComision, Oficio oficio, ReparaFix app) 
+	public Trabajador(String nombre, String correoElectronico, Double costoPorHora, Double porcentajeDeComision, Oficio oficio, ReparaFix reparaFix) 
 	{
 		this.id = contadorIds++;
 		this.nombre = nombre;
@@ -29,7 +29,7 @@ public class Trabajador implements Identificable
 		this.porcentajeDeComision = porcentajeDeComision;
 		this.oficio = oficio;
 		trabajosARealizar = new LinkedList<Trabajo>();
-		this.app = app;
+		this.reparaFix = reparaFix;
 	}
 
 	public Boolean agendaOcupada(LocalDate dia)

@@ -13,14 +13,14 @@ public class Herramienta implements Identificable
 	private String nombre;
 	private Double costoPorDia;
 	private Alquiler alquiler;
-	private ReparaFix app;
+	private ReparaFix reparaFix;
 	
-	public Herramienta(String nombre, Double costoPorDia, ReparaFix app) 
+	public Herramienta(String nombre, Double costoPorDia, ReparaFix reparaFix) 
 	{
 		this.id = contadorIds++;
 		this.nombre = nombre;
 		this.costoPorDia = costoPorDia;
-		this.app = app;
+		this.reparaFix = reparaFix;
 	}
 
 	public Boolean estaAlquilada() { return alquiler != null; }
@@ -40,8 +40,8 @@ public class Herramienta implements Identificable
 		
 		if (!this.estaAlquilada())
 		{
-			auxAlquiler = new Alquiler(diaDeInicio, diaDeFinalizacion, this, app);
-			app.agregarAlquiler(auxAlquiler);
+			auxAlquiler = new Alquiler(diaDeInicio, diaDeFinalizacion, this, reparaFix);
+			reparaFix.agregarAlquiler(auxAlquiler);
 			this.alquiler = auxAlquiler;
 			return auxAlquiler;
 		}

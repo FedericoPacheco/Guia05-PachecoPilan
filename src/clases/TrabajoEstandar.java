@@ -6,9 +6,9 @@ public class TrabajoEstandar extends Trabajo
 {
 	private Integer horasTrabajadas;
 	
-	public TrabajoEstandar(Boolean esUrgente, LocalDate diaDeInicio, Servicio servicio, Trabajador trabajador, ReparaFix app)
+	public TrabajoEstandar(Boolean esUrgente, LocalDate diaDeInicio, Servicio servicio, Trabajador trabajador, ReparaFix reparaFix)
 	{
-		super(esUrgente, diaDeInicio, servicio, trabajador, app);
+		super(esUrgente, diaDeInicio, servicio, trabajador, reparaFix);
 		this.horasTrabajadas = 0;
 	}
 

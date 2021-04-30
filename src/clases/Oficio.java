@@ -9,13 +9,13 @@ public class Oficio implements Identificable
 	private Integer id;
 	private String nombre;
 	@SuppressWarnings("unused")
-	private ReparaFix app;
+	private ReparaFix reparaFix;
 	
-	public Oficio(String nombre, ReparaFix app) 
+	public Oficio(String nombre, ReparaFix reparaFix) 
 	{
 		this.id = contadorIds++;
 		this.nombre = nombre;
-		this.app = app;
+		this.reparaFix = reparaFix;
 	}
 
 	public Boolean equals(Oficio otroOficio) { return this.id == otroOficio.getId(); }

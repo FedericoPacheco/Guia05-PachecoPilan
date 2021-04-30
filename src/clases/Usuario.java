@@ -22,15 +22,15 @@ public class Usuario implements Identificable
 	private String contrasenia;
 	private Integer cantidadDeAlquileresHechos;
 	private List<Contratable> contratables;
-	private ReparaFix app;
+	private ReparaFix reparaFix;
 	
-	public Usuario(String nombreUsuario, String correoElectronico, String contrasenia, ReparaFix app) 
+	public Usuario(String nombreUsuario, String correoElectronico, String contrasenia, ReparaFix reparaFix) 
 	{
 		this.id = contadorIds++;
 		this.nombreUsuario = nombreUsuario;
 		this.correoElectronico = correoElectronico;
 		this.contrasenia = contrasenia;
-		this.app = app;
+		this.reparaFix = reparaFix;
 		this.contratables = new LinkedList<Contratable>();
 		this.cantidadDeAlquileresHechos = 0;
 	}
@@ -40,7 +40,7 @@ public class Usuario implements Identificable
 		Servicio auxServicio;
 		Trabajo auxTrabajo;
 		
-		auxServicio = app.buscarServicio(idServicio);
+		auxServicio = reparaFix.buscarServicio(idServicio);
 		auxTrabajo = auxServicio.contratarTrabajo(diaDeInicio, esUrgente);
 		contratables.add(auxTrabajo);
 	}
@@ -54,7 +54,7 @@ public class Usuario implements Identificable
 			throw new AlquilerNoEntregadoException();
 		else
 		{
-			auxHerramienta = app.buscarHerramienta(idHerramienta);
+			auxHerramienta = reparaFix.buscarHerramienta(idHerramienta);
 			auxAlquiler = auxHerramienta.contratarAlquiler(cantidadDeDias, diaDeInicio);
 			contratables.add(auxAlquiler);
 			cantidadDeAlquileresHechos++;
@@ -63,7 +63,7 @@ public class Usuario implements Identificable
 	
 	public void devolverHerramienta(Integer idAlquiler, LocalDate dia) throws IdentificableNoEncontradoException
 	{
-		app.buscarAlquiler(idAlquiler).setDiaDeDevolucion(dia);
+		reparaFix.buscarAlquiler(idAlquiler).setDiaDeDevolucion(dia);
 		this.cantidadDeAlquileresHechos--;
 	}
 	

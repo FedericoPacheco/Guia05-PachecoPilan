@@ -12,14 +12,14 @@ public abstract class Servicio implements Identificable
 	protected Integer id;
 	protected String nombre;
 	protected Oficio oficio;
-	protected ReparaFix app;
+	protected ReparaFix reparaFix;
 	
-	public Servicio(String nombre, Oficio oficio, ReparaFix app) 
+	public Servicio(String nombre, Oficio oficio, ReparaFix reparaFix) 
 	{
 		this.id = contadorIds++;
 		this.nombre = nombre;
 		this.oficio = oficio;
-		this.app = app;
+		this.reparaFix = reparaFix;
 	}
 	
 	public abstract Double getMonto();

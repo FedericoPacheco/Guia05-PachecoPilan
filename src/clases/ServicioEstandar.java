@@ -9,9 +9,9 @@ public class ServicioEstandar extends Servicio
 {
 	private Double monto;
 	
-	public ServicioEstandar(String nombre, Oficio oficio, ReparaFix app, Double monto)
+	public ServicioEstandar(String nombre, Oficio oficio, ReparaFix reparaFix, Double monto)
 	{
-		super(nombre, oficio, app);
+		super(nombre, oficio, reparaFix);
 		this.monto = monto;
 	}
 
@@ -23,18 +23,18 @@ public class ServicioEstandar extends Servicio
 		Trabajador auxTrabajador;
 		
 		LocalDate dia = diaDeInicio;
-		Optional<Trabajador> auxOptionalTrabajador = app.buscarTrabajadorConOficio(oficio, dia, esUrgente);
+		Optional<Trabajador> auxOptionalTrabajador = reparaFix.buscarTrabajadorConOficio(oficio, dia, esUrgente);
 		
 		if(!esUrgente)
 			while(auxOptionalTrabajador.isEmpty()) // si no es urgente seguir buscando en los sucesivos dias hasta encontrar un trabajador
 			{
 				dia = dia.plusDays(1);
-				auxOptionalTrabajador = app.buscarTrabajadorConOficio(oficio, dia, esUrgente);
+				auxOptionalTrabajador = reparaFix.buscarTrabajadorConOficio(oficio, dia, esUrgente);
 			}
 		
 		auxTrabajador = auxOptionalTrabajador.get();
-		auxTrabajoEstandar = new TrabajoEstandar(esUrgente, dia, this, auxTrabajador, app);
-		app.agregarTrabajo(auxTrabajoEstandar);
+		auxTrabajoEstandar = new TrabajoEstandar(esUrgente, dia, this, auxTrabajador, reparaFix);
+		reparaFix.agregarTrabajo(auxTrabajoEstandar);
 		auxTrabajador.agregarTrabajo(auxTrabajoEstandar);
 		
 		return auxTrabajoEstandar;

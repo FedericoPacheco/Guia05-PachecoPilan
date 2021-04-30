@@ -8,9 +8,9 @@ public class TrabajoPersonalizado extends Trabajo
 	private Double costoDeMateriales;
 	private Double costoDeTransporte;
 	
-	public TrabajoPersonalizado(Boolean esUrgente, LocalDate diaDeInicio, Servicio servicio, Trabajador trabajador, ReparaFix app)
+	public TrabajoPersonalizado(Boolean esUrgente, LocalDate diaDeInicio, Servicio servicio, Trabajador trabajador, ReparaFix reparaFix)
 	{
-		super(esUrgente, diaDeInicio, servicio, trabajador, app);
+		super(esUrgente, diaDeInicio, servicio, trabajador, reparaFix);
 		this.valorPresupuestado = 0.0;
 		this.costoDeMateriales = 0.0;
 		this.costoDeTransporte = 0.0;

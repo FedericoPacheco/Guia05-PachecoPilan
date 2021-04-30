@@ -17,15 +17,15 @@ public class Alquiler implements Contratable, Identificable
 	private LocalDate diaDeDevolucion;
 	private Herramienta herramienta;
 	@SuppressWarnings("unused")
-	private ReparaFix app;
+	private ReparaFix reparaFix;
 	
-	public Alquiler(LocalDate diaDeInicio, LocalDate diaDeFinalizacion, Herramienta herramienta, ReparaFix app) 
+	public Alquiler(LocalDate diaDeInicio, LocalDate diaDeFinalizacion, Herramienta herramienta, ReparaFix reparaFix) 
 	{
 		this.id = contadorIds++;
 		this.diaDeInicio = diaDeInicio;
 		this.diaDeFinalizacion = diaDeFinalizacion;
 		this.herramienta = herramienta;
-		this.app = app;
+		this.reparaFix = reparaFix;
 	}
 	
 	public Boolean enMora() 
