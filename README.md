@@ -23,10 +23,10 @@ monto del ServicioEstandar y luego sumarle el costo por hora del Trabajador. A t
 recargo por urgencia. 
 
 - Las excepciones del inciso 7), por como está hecho el trabajo, no fueron implementadas:
-	> OficioNoCoincideException no puede ocurrir porque la contratación (creación) del trabajo 
+	+ OficioNoCoincideException no puede ocurrir porque la contratación (creación) del trabajo 
 	ocurre en ServicioEstandar o ServicioPersonalizado con el Oficio que éstos tienen registrado,
 	y la búsqueda del Trabajador con dicho Oficio se delega a la clase ReparaFix.
-	> AgendaOcupadaException no tiene tanto sentido porque para la contratación de un Trabajo no
+	+ AgendaOcupadaException no tiene tanto sentido porque para la contratación de un Trabajo no
 	se especifica el Trabajador específico que debe realizarlo. Siendo que ReparaFix efectúa la 
 	búsqueda de un Trabajador con el Oficio del Servicio, se generarían excepciones cada vez que 
 	el trabajador encontrado no tuviera la agenda libre. De esta suerte, esta excepción fue
